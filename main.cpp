@@ -1,14 +1,32 @@
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
+#include <iostream>
 #include "InputMgr.h"
+#include "ResourceMgr.h"
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
-    sf::CircleShape shape(100.f);
+    sf::RenderWindow window(sf::VideoMode(1280, 720), "SFML works!");
+    sf::CircleShape shape(360.f);
     shape.setFillColor(sf::Color::Green);
+
+    ResourceMgr<sf::Texture>::Instance().Load(
+        { "graphics/player.png",
+          "graphics/player.png",
+          "graphics/bee.png",
+          "graphics/bee.png" }
+    );
+ 
+    sf::Sprite sprite;
+    sprite.setTexture(ResourceMgr<sf::Texture>::Instance().Get("graphics/player.png"));
+
+    sf::Sprite bee;
+    bee.setTexture(ResourceMgr<sf::Texture>::Instance().Get("graphics/bee.png"));
 
     while (window.isOpen())
     {
+
+        
         InputMgr::Clear();
 
         sf::Event event;
@@ -40,6 +58,8 @@ int main()
         //Draw
         window.clear();
         window.draw(shape);
+        window.draw(sprite);
+        window.draw(bee);
         window.display();
     }
 

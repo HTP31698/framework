@@ -1,5 +1,5 @@
 #pragma once
-#include <list>
+#include <vector> //순차 컨테이너 find 하려면 처음부터 돌려봐야함
 #include <iostream>
 #include <SFML/Window/Keyboard.hpp>
 #include <SFML/Window/Event.hpp>
@@ -7,9 +7,9 @@
 class InputMgr
 {
 private:
-	static std::list<sf::Keyboard::Key> downKeys;
-	static std::list<sf::Keyboard::Key> heldKeys;
-	static std::list<sf::Keyboard::Key> upKeys;
+	static std::vector<bool> downKeys;
+	static std::vector<bool> heldKeys;
+	static std::vector<bool> upKeys;
 
 public:
 	static void Init();
@@ -21,7 +21,4 @@ public:
 	static bool GetKeyDown(sf::Keyboard::Key key);
 	static bool GetKeyUp(sf::Keyboard::Key key);
 	static bool GetKey(sf::Keyboard::Key key);
-
-	static bool Contains(const std::list<sf::Keyboard::Key>& list, sf::Keyboard::Key key);
-	static void Remove(std::list<sf::Keyboard::Key>& list, sf::Keyboard::Key key);
 };
